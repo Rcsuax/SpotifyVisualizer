@@ -8,6 +8,9 @@ var y;
 var posx;
 var posy;
 var curRadius
+var xVal;
+var yVal;
+var gridRotator;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -16,6 +19,7 @@ function setup() {
     noiseMax = 300;
     angleStep = 365/totalRays;
     noiseSeeds = random(10000);
+    gridRotator = 0;
 
 }
 
@@ -23,7 +27,8 @@ function draw() {
 	background(0);
 	noFill();
     stroke(random(255), random(255), random(255));
-	smokeyCircle(width/2, height/2);
+	//smokeyCircle(width/2, height/2);
+    drawGrid(10, 10);
 }
 
 function smokeyCircle(x, y){
@@ -45,4 +50,25 @@ function smokeyCircle(x, y){
     endShape(CLOSE);
     pop();
     
+}
+
+function drawGrid(verticalLines, horizontalLines) {
+    translate(width / 2, height / 2);
+    rotate(gridRotator);
+    yVal = height / horizontalLines;
+    xVal = width / horizontalLines;
+    stroke(255);
+    push();
+
+    for(var i = 0; i <= verticalLines; i++) {
+        line((-width / 2) + i * xVal, -height / 2, (-width / 2) + i * xVal, height / 2);
+    }
+    pop();
+
+    push();
+    for (var j = 0; j <= horizontalLines; j++) {
+        line(-width / 2, (-height / 2) + j * yVal, width / 2, (-height / 2) + j * yVal);       
+    }
+    pop();
+    gridRotator += 0.01;
 }
