@@ -27,18 +27,18 @@ function draw() {
 	background(0);
 	noFill();
     stroke(random(255), random(255), random(255));
-	//smokeyCircle(width/2, height/2);
-    drawGrid(10, 10);
+	smokeyCircle(width/2, height/2, stubWaveform());
+    //drawGrid(10, 10);
 }
 
-function smokeyCircle(x, y){
+function smokeyCircle(x, y, points){
 	
     push();
     translate(x,y);
 	beginShape();
     
    for (var i = 0; i < totalRays; i++) {
-        curRadius =  radius + noise(noiseSeeds) * noiseMax; //Creates movement
+        curRadius =  radius + (points[i] * noiseMax); //Creates movement
         posx = sin((angleStep*i)) * curRadius; //Distributes x points
         posy = cos((angleStep*i)) * curRadius; //Distributes y points
 
@@ -71,4 +71,14 @@ function drawGrid(verticalLines, horizontalLines) {
     }
     pop();
     gridRotator += 0.01;
+}
+
+function stubWaveform() {
+    var noiseSeed = random(10000);
+    var stub = [];
+    for (var i = 0; i < 1000; i++) {
+        stub[i] = noise(noiseSeed);
+        noiseSeed += 0.1;
+    }
+    return stub;
 }
