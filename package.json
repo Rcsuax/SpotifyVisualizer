@@ -16,6 +16,8 @@
     "babel-preset-es2015": "^6.24.1"
   },
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "json-parser": "^1.1.5",
+    "parse-json": "^2.2.0"
   }
 }
