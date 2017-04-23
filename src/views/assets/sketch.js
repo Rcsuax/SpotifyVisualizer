@@ -13,6 +13,12 @@ var ry;
 var xVal;
 var yVal;
 var gridRotator;
+var jsonPoints;
+
+function preload() {
+     jsonPoints = loadJSON('http://localhost:8080/api')
+     console.log(jsonPoints);
+}
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -31,11 +37,13 @@ function draw() {
 	background(0);
 	noFill();
     //stroke(random(255), random(255), random(255));
-	//smokeyCircle(width/2, height/2);
 	fill(255, 176, 255);
 	shapes();
     stroke(random(255), random(255), random(255));
-	smokeyCircle(width/2, height/2, stubWaveform());
+
+    // Looks Ugly, might need to do some reworking here
+	//smokeyCircle(width/2, height/2, stubWaveform());
+    smokeyCircle(width/2, height/2, jsonPoints.bars);
     //drawGrid(10, 10);
 }
 
@@ -46,14 +54,13 @@ function smokeyCircle(x, y, points){
 	beginShape();
 
    for (var i = 0; i < totalRays; i++) {
-        curRadius =  radius + (points[i] * noiseMax); //Creates movement
+        curRadius =  radius + (points[i].amplitude * noiseMax); //Creates movement
         posx = sin((angleStep*i)) * curRadius; //Distributes x points
         posy = cos((angleStep*i)) * curRadius; //Distributes y points
 
         vertex(posx,posy);
         noiseSeeds += 0.01; //Increment all by 0.01
 
-        //console.log();
     }
     endShape(CLOSE);
     pop();
