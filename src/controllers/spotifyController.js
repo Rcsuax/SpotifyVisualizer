@@ -6,13 +6,13 @@ let router = express.Router();
 
 router.get('/', (req,res) => {
     const headers = {
-        headers: {'Authorization': 'Bearer BQA4vs-rqhbUq-T2MCg2ULJL0rBZdap2mCZnVOT55pPCwLTiDGnSYOj3P6M2nn0DLQlbBKmVBuuGOkRsLQaohDiFsYlNnoWKkBnupjSZMSXis2bT9-4dUwmggODNncZQ3jno0g'},
+        headers: {'Authorization': 'Bearer BQBh5_8d2S51Zz3EPMOSfmfmH4bKAB7CBwo3IGylIds2n0AS2lldqFyCx4I8F8TJzN3uO8h9DAhO7PrMGHwlBuxLLyZEpGF2i8UhmcZmB8pfVHnUbwgWgCF9_WFHzExfX2b4_w'},
         transformResponse: [function (data) {
             let json = JSON.parse(data)
-            let track = { 'duration': json.track.duration , 'bars' : [] } //{'start': json.segments.start, 'amplitude':json.segments.loudness_max}
-            json.segements.forEach(function() {
-                track.bars.unshift({'start': json.segments.start, 'amplitude':json.segments.loudness_max})
-            })
+            let track = { 'duration': json.track.duration , 'bars' : [] }
+                json.segments.forEach(function(seg) {
+                    track.bars.unshift({'start': seg.start, 'amplitude': seg.loudness_max})
+                })
             return track;
         }],
     }
