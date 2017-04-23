@@ -6,7 +6,7 @@ let router = express.Router();
 
 router.get('/', (req,res) => {
     const headers = {
-        headers: {'Authorization': 'Bearer BQBh5_8d2S51Zz3EPMOSfmfmH4bKAB7CBwo3IGylIds2n0AS2lldqFyCx4I8F8TJzN3uO8h9DAhO7PrMGHwlBuxLLyZEpGF2i8UhmcZmB8pfVHnUbwgWgCF9_WFHzExfX2b4_w'},
+        headers: {'Authorization': 'Bearer BQAcMC_avtNAtrhQLWkzWWimOVHj13gaj3MZ1qMjh7ffgkz2nDJ48J_lXQy8GmRvI9Sd1R73CmMwLw18Jm85UtTnjIHAW1ZrS7N5rVg0i9qR8JRcy4QKZSXczlhXZfFiV-li1Q'},
         transformResponse: [function (data) {
             let json = JSON.parse(data)
             let track = { 'duration': json.track.duration , 'bars' : [] }

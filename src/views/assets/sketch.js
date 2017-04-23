@@ -37,13 +37,15 @@ function draw() {
 	background(0);
 	noFill();
     //stroke(random(255), random(255), random(255));
-	fill(255, 176, 255);
+    stroke(180);
+    strokeWeight(2);
 	shapes();
-    stroke(random(255), random(255), random(255));
+    stroke(255);
 
     // Looks Ugly, might need to do some reworking here
-	//smokeyCircle(width/2, height/2, stubWaveform());
-    smokeyCircle(width/2, height/2, jsonPoints.bars);
+	smokeyCircle(width/2, height/2, stubWaveform());
+
+    //smokeyCircle(width/2, height/2, jsonPoints.bars);
     //drawGrid(10, 10);
 }
 
@@ -54,12 +56,13 @@ function smokeyCircle(x, y, points){
 	beginShape();
 
    for (var i = 0; i < totalRays; i++) {
-        curRadius =  radius + (points[i].amplitude * noiseMax); //Creates movement
+        curRadius =  radius + (points[i] * noiseMax); //Creates movement
         posx = sin((angleStep*i)) * curRadius; //Distributes x points
         posy = cos((angleStep*i)) * curRadius; //Distributes y points
 
         vertex(posx,posy);
         noiseSeeds += 0.01; //Increment all by 0.01
+        console.log(jsonPoints.bars[i].amplitude);
 
     }
     endShape(CLOSE);
@@ -103,6 +106,7 @@ function stubWaveform() {
     var stub = [];
     for (var i = 0; i < 1000; i++) {
         stub[i] = noise(noiseSeed);
+        //stub = map(jsonPoints.bars[i].amplitude, -60, 0, 0, 1);
         noiseSeed += 0.1;
     }
     return stub;
